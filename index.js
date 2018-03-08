@@ -17,4 +17,10 @@ massive(process.env.CONNECTION_STRING)
   })
   .catch(err => console.log(err));
 
-app.listen(process.env.PORT || 3001, () => console.log('Listening!'));
+app.get('/api/products', controller.getAll);
+app.get('/api/product/:id', controller.getOne);
+app.put('/api/product/:id', controller.update);
+app.post('/api/product', controller.create);
+app.delete('/api/product/:id', controller.deleteProduct);
+
+app.listen(process.env.PORT || 3000, () => console.log('Listening!'));

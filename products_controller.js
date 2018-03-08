@@ -2,7 +2,7 @@ module.exports = {
   create(req, res) {
     const db = req.app.get('db');
     db
-      .create_product()
+      .create_product([req.body.name, req.body.description, req.body.price, req.body.imageurl])
       .then(() => res.status(200).json())
       .catch((err) => {
         console.log(err);
@@ -13,8 +13,8 @@ module.exports = {
   getOne(req, res) {
     const db = req.app.get('db');
     db
-      .read_product()
-      .then(() => res.status(200).json(product))
+      .read_product([req.params.id])
+      .then(product => res.status(200).json(product))
       .catch((err) => {
         console.log(err);
         return res.status(500).json();
@@ -25,7 +25,7 @@ module.exports = {
     const db = req.app.get('db');
     db
       .read_products()
-      .then(() => res.status(200).json(products))
+      .then(products => res.status(200).json(products))
       .catch((err) => {
         console.log(err);
         return res.status(500).json();
@@ -35,7 +35,7 @@ module.exports = {
   update(req, res) {
     const db = req.app.get('db');
     db
-      .update_product()
+      .update_product([req.params.id, req.query.desc])
       .then(() => res.status(200).json())
       .catch((err) => {
         console.log(err);
@@ -46,7 +46,7 @@ module.exports = {
   deleteProduct(req, res) {
     const db = req.app.get('db');
     db
-      .delete_product()
+      .delete_product([req.params.id])
       .then(() => res.status(200).json())
       .catch((err) => {
         console.log(err);
