@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
+const controller = require('./products_controller');
 require('dotenv').config();
 
 const app = express(); // Instantiates Express
